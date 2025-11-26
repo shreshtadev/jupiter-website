@@ -1,22 +1,41 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import "../styles/global.css";
+const { title = "Shreshta SMG", description = "Welcome to shreshtasmg.in" } =
+  Astro.props;
+---
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<!doctype html>
+<html lang="en" data-theme="retro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
+    />
+    <script
+      is:inline
+      src={`https://www.google.com/recaptcha/api.js?render=${import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY}`}
+      async
+      defer></script>
+  </head>
+  <body
+    class="min-h-screen font-body bg-base-100 text-base-content overflow-x-hidden"
+  >
+    <div
+      class="pointer-events-none fixed inset-0 -z-10 opacity-50 mix-blend-soft-light"
+      aria-hidden="true"
+    >
+      <div
+        class="h-full w-full bg-[radial-gradient(circle_at_top,rgba(248,113,113,0.3),transparent_55%),radial-gradient(circle_at_bottom,rgba(52,211,153,0.25),transparent_55%)]"
+      >
+      </div>
+    </div>
+
+    <main class="relative">
+      <slot />
+    </main>
+  </body>
+</html>

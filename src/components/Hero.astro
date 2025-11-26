@@ -1,0 +1,88 @@
+---
+const highlights = [
+  "Modern, responsive, and scalable digital experiences",
+  "Elegant UI designs paired with powerful full-stack systems",
+  "Blending logic, creativity, and clean code in every project",
+];
+---
+
+<!-- HERO -->
+  <section
+    id="top"
+    class="mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-20 pt-12 md:flex-row md:items-center md:pb-28 md:pt-16"
+  >
+    <div class="flex-1 space-y-6">
+      <span class="badge badge-outline border-dashed text-xs uppercase tracking-[0.2em]">
+        Software Developer · Full-Stack
+      </span>
+      <h1
+        class="font-display text-4xl leading-tight tracking-tight md:text-5xl lg:text-6xl"
+      >
+        <span class="text-primary">digital experiences</span>
+        that actually ship.
+      </h1>
+      <p class="max-w-xl text-base md:text-lg">
+        I create modern, responsive, and scalable digital experiences—from elegant UI designs
+        to powerful full-stack applications. Every project blends creativity with clean code
+        to bring ideas to life.
+      </p>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <a href="#contact" class="btn btn-primary btn-lg normal-case">
+          Start a project
+        </a>
+        <a href="#services" class="btn btn-ghost btn-lg normal-case">
+          View services
+        </a>
+      </div>
+
+      <div class="grid gap-3 text-xs text-base-content/80 sm:grid-cols-3">
+        {highlights.map((h) => (
+          <div class="flex items-start gap-2 rounded-box bg-base-200/60 p-3">
+            <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+            <p>{h}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="flex-1">
+      <div class="mockup-window border bg-base-200/70 shadow-2xl">
+        <div class="space-y-4 bg-base-100 p-6">
+          <div class="flex items-center justify-between">
+            <span class="font-display text-sm uppercase tracking-[0.25em]">
+              shreshtasmg
+            </span>
+            <div class="flex gap-1">
+              <div class="h-2 w-2 rounded-full bg-error"></div>
+              <div class="h-2 w-2 rounded-full bg-warning"></div>
+              <div class="h-2 w-2 rounded-full bg-success"></div>
+            </div>
+          </div>
+          <p class="text-sm text-base-content/80">
+            Developed and maintained full-stack applications used by real users.
+            Built scalable backend APIs, optimized performance, and collaborated with design
+            and product teams to ship features faster.
+          </p>
+          <div class="divider my-2"></div>
+          <div class="grid grid-cols-3 gap-3 text-xs">
+            <div class="stat bg-base-200/80 rounded-box p-3">
+              <div class="stat-title text-[0.7rem]">Focus</div>
+              <div class="stat-value text-lg">Full-Stack</div>
+              <div class="stat-desc">Web · Mobile · APIs</div>
+            </div>
+            <div class="stat bg-base-200/80 rounded-box p-3">
+              <div class="stat-title text-[0.7rem]">Approach</div>
+              <div class="stat-value text-lg">Product-first</div>
+              <div class="stat-desc">Design + Dev</div>
+            </div>
+            <div class="stat bg-base-200/80 rounded-box p-3">
+              <div class="stat-title text-[0.7rem]">Style</div>
+              <div class="stat-value text-lg">Retro-modern</div>
+              <div class="stat-desc">Clean & playful</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

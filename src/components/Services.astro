@@ -1,0 +1,55 @@
+---
+const services = [
+  "Web Application Development",
+  "Mobile App Development",
+  "API & Backend Development",
+  "UI/UX Implementation",
+  "Code Optimization & Refactoring",
+  "Freelance & Contract Development",
+  "Custom Software Development",
+];
+---
+<section
+    id="services"
+    class="mx-auto max-w-6xl space-y-8 px-4 pb-20 md:pb-24"
+  >
+    <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+      <div>
+        <h2 class="font-display text-2xl md:text-3xl">Services</h2>
+        <p class="max-w-xl text-sm md:text-base">
+          From quick MVPs to production-grade platforms, I handle both the
+          <span class="font-semibold"> user experience</span> and the
+          <span class="font-semibold">engineering backbone</span>.
+        </p>
+      </div>
+      <span class="badge badge-outline badge-lg">
+        Custom-built solutions — not templates
+      </span>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {services.map((service, i) => (
+        <article class="card bg-base-200/80 shadow-md hover:shadow-lg transition-shadow">
+          <div class="card-body">
+            <div class="flex items-center justify-between">
+              <h3 class="card-title text-base md:text-lg">
+                {service}
+              </h3>
+              <span class="badge badge-primary badge-outline text-[0.65rem]">
+                0{i + 1}
+              </span>
+            </div>
+            <p class="text-sm text-base-content/80">
+              {service === "Web Application Development" && "Modern web apps that feel fast, polished, and reliable—built with clean, maintainable code."}
+              {service === "Mobile App Development" && "Cross-platform experiences that look and feel native, focused on performance and usability."}
+              {service === "API & Backend Development" && "Scalable APIs, secure auth, and solid data models powering your product behind the scenes."}
+              {service === "UI/UX Implementation" && "Pixel-perfect interfaces that translate design systems into responsive, interactive components."}
+              {service === "Code Optimization & Refactoring" && "Improve performance, readability, and architecture without breaking what already works."}
+              {service === "Freelance & Contract Development" && "Plug-in support for your existing team or project with clear communication and ownership."}
+              {service === "Custom Software Development" && "End-to-end solutions tailored to your specific workflow, users, and business goals."}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
