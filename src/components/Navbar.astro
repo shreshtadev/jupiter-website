@@ -1,64 +1,126 @@
-<!-- NAVBAR -->
+---
+/**
+ * Navbar.astro
+ * Sticky, glassy navbar with desktop pill-nav + mobile dropdown.
+ */
+---
+
 <header
-  class="sticky top-0 z-40 border-b border-base-300 bg-base-100/80 backdrop-blur"
+  class="sticky top-0 z-40 border-b border-base-300/70 bg-base-100/70 backdrop-blur-xl"
 >
   <div class="navbar mx-auto max-w-6xl px-4">
-    <div class="flex-1">
+    <!-- LEFT: logo -->
+    <div class="navbar-start gap-2">
       <a
         href="#top"
-        class="btn btn-ghost px-0 text-xl font-display tracking-tight lowercase"
+        class="inline-flex items-center gap-2 font-display text-lg md:text-xl tracking-tight lowercase"
       >
-        <span class="mr-2 inline-block h-2 w-2 rounded-full bg-primary"></span>
-        shreshtasmg
+        <span class="relative inline-flex h-5 w-5 items-center justify-center">
+          <span
+            class="absolute inline-block h-5 w-5 rounded-full bg-primary/30 blur-[6px]"
+          ></span>
+          <span
+            class="relative inline-block h-2.5 w-2.5 rounded-full bg-primary"
+          ></span>
+        </span>
+        <span class="font-semibold">shreshta</span>
+        <span
+          class="text-xs font-semibold tracking-[0.3em] uppercase text-base-content/60 hidden sm:inline"
+        >
+          smg
+        </span>
       </a>
     </div>
-    <nav class="hidden gap-2 text-sm md:flex">
-      <a href="#services" data-nav-link="services" class="btn btn-ghost btn-sm">
-        Services
-      </a>
-      <a href="#about" data-nav-link="about" class="btn btn-ghost btn-sm">
-        About
-      </a>
-      <a href="#why" data-nav-link="why" class="btn btn-ghost btn-sm">
-        Why me
-      </a>
-      <a href="#contact" data-nav-link="contact" class="btn btn-primary btn-sm">
-        Let&quot;s talk
-      </a>
-    </nav>
-    <label
-      tabindex="0"
-      class="btn btn-ghost btn-square md:hidden"
-      for="main-drawer"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
+
+    <!-- CENTER: pill nav (desktop only) -->
+    <div class="navbar-center hidden md:flex">
+      <nav
+        class="rounded-full border border-base-300/80 bg-base-100/90 px-2 py-1 shadow-sm backdrop-blur-md"
+        aria-label="Primary"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </label>
+        <ul class="flex items-center gap-1 text-xs">
+          <li>
+            <a
+              href="#services"
+              data-nav-link="services"
+              class="btn btn-ghost btn-xs rounded-full px-3"
+            >
+              Services
+            </a>
+          </li>
+          <li>
+            <a
+              href="#about"
+              data-nav-link="about"
+              class="btn btn-ghost btn-xs rounded-full px-3"
+            >
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              href="#why"
+              data-nav-link="why"
+              class="btn btn-ghost btn-xs rounded-full px-3"
+            >
+              Why me
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- RIGHT: CTA + mobile menu -->
+    <div class="navbar-end gap-2">
+      <!-- main CTA (hidden on very small screens to keep space) -->
+      <a
+        href="#contact"
+        class="btn btn-primary btn-sm md:btn-md normal-case hidden xs:inline-flex"
+      >
+        Let&amp;s talk
+      </a>
+
+      <!-- mobile dropdown -->
+      <div class="dropdown dropdown-end md:hidden">
+        <label tabindex="0" class="btn btn-ghost btn-square">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </label>
+        <ul
+          tabindex="0"
+          class="menu menu-sm dropdown-content mt-3 z-50 w-56 rounded-box border border-base-300 bg-base-100/95 p-2 shadow-xl backdrop-blur-xl"
+        >
+          <li>
+            <a href="#services" data-nav-link="services"> Services </a>
+          </li>
+          <li>
+            <a href="#about" data-nav-link="about"> About </a>
+          </li>
+          <li>
+            <a href="#why" data-nav-link="why"> Why work with me </a>
+          </li>
+          <li class="mt-1 border-t border-base-300 pt-1">
+            <a
+              href="#contact"
+              data-nav-link="contact"
+              class="font-semibold text-primary"
+            >
+              Let&amp;s talk
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </header>
-
-<!-- MOBILE DRAWER -->
-<input id="main-drawer" type="checkbox" class="drawer-toggle hidden" />
-<div class="drawer drawer-end md:hidden">
-  <input id="main-drawer" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-side z-50">
-    <label for="main-drawer" class="drawer-overlay"></label>
-    <ul class="menu min-h-full w-64 bg-base-200 p-4 text-base">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#why">Why work with me</a></li>
-      <li><a href="#contact">Let&quot;s talk</a></li>
-    </ul>
-  </div>
-</div>
