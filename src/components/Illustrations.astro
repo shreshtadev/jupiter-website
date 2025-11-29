@@ -1,0 +1,52 @@
+---
+interface Props {
+  variant?: "hero" | "services" | "contact";
+  alt?: string;
+  class?: string; // extra Tailwind classes
+}
+
+const { variant = "hero", alt, class: className = "" } = Astro.props;
+
+// Import your illustrations
+import heroIllustration from "../assets/background.svg";
+import servicesIllustration from "../assets/services-illustration.svg";
+import contactIllustration from "../assets/contact-illustration.svg";
+
+const sources = {
+  hero: heroIllustration,
+  services: servicesIllustration,
+  contact: contactIllustration,
+} as const;
+
+const img = sources[variant] ?? sources.hero;
+
+const computedAlt =
+  alt ??
+  (variant === "hero"
+    ? "Colorful hand-drawn illustration for the hero section"
+    : variant === "services"
+      ? "Colorful hand-drawn illustration representing services"
+      : "Colorful hand-drawn illustration for the contact section");
+---
+
+<figure class={`relative inline-block ${className}`}>
+  <!-- subtle retro frame around the art -->
+  <div
+    class="absolute inset-0 translate-x-1 translate-y-1 rounded-3xl border border-dashed border-primary/40"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div
+    class="relative rounded-3xl border border-base-300 bg-base-100/90 p-4 shadow-lg"
+  >
+    <img
+      src={img.src}
+      width={img.width}
+      height={img.height}
+      alt={computedAlt}
+      loading="lazy"
+      class="block max-w-full h-auto rounded-2xl"
+    />
+  </div>
+</figure>

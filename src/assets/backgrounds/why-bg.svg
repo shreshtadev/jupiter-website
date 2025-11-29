@@ -1,0 +1,28 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Why work with us</title>
+  <desc id="desc">Working at Shreshta is ....</desc>
+
+  <rect x="0" y="0" width="1200" height="600" fill="none"/>
+
+  <!-- Directional wedge -->
+  <path d="M140,460 L380,380 L320,260 L80,340 Z" fill="#1f2937"/>
+  <path d="M420,360 L620,300 L580,220 L380,280 Z" fill="#111827"/>
+
+  <!-- Progress arcs -->
+  <path d="M720,160 A200,200 0 0 1 1080,220" stroke="#3b82f6" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M720,160 A240,240 0 0 1 1100,280" stroke="#22c55e" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.85"/>
+  <path d="M720,160 A280,280 0 0 1 1120,340" stroke="#ef4444" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Goal markers -->
+  <circle cx="960" cy="240" r="22" fill="#f59e0b"/>
+  <rect x="980" y="360" width="16" height="64" rx="8" fill="#06b6d4"/>
+  <circle cx="820" cy="320" r="10" fill="#a78bfa"/>
+
+  <!-- Abstract compass -->
+  <g transform="translate(480,320)">
+    <circle cx="0" cy="0" r="58" fill="#fef3c7"/>
+    <path d="M0,-46 L14,-10 L0,0 L-14,-10 Z" fill="#3b82f6"/>
+    <path d="M0,46 L-8,12 L0,0 L8,12 Z" fill="#ef4444"/>
+    <circle cx="0" cy="0" r="6" fill="#0f0f12"/>
+  </g>
+</svg>

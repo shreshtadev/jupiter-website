@@ -1,0 +1,34 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Contact Us</title>
+  <desc id="desc">Lets Talk</desc>
+
+  <rect x="0" y="0" width="1200" height="600" fill="none"/>
+
+  <!-- Abstract shapes -->
+  <path d="M240,420 C200,320 280,240 370,260 C480,284 520,380 460,450 C400,520 280,520 240,420 Z" fill="#111827"/>
+  <path d="M820,160 C900,90 1040,120 1060,220 C1080,320 960,420 840,390 C780,374 740,230 820,160 Z" fill="#1f2937"/>
+
+  <!-- Signal waves -->
+  <path d="M220,140 C360,120 540,120 680,140" stroke="#06b6d4" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M240,170 C380,160 520,160 660,170" stroke="#22c55e" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.85"/>
+  <path d="M260,200 C360,200 540,200 740,200" stroke="#ef4444" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Minimal device icons (abstract) -->
+  <g transform="translate(860,260)">
+    <rect x="-40" y="-30" width="80" height="56" rx="10" fill="none" stroke="#9ca3af" stroke-width="3"/>
+    <rect x="-40" y="-30" width="80" height="14" rx="8" fill="#3b82f6"/>
+    <circle cx="-28" cy="-22" r="4" fill="#0f0f12"/>
+    <circle cx="-16" cy="-22" r="4" fill="#0f0f12"/>
+  </g>
+
+  <g transform="translate(980,340)">
+    <rect x="-24" y="-40" width="48" height="80" rx="10" fill="none" stroke="#9ca3af" stroke-width="3"/>
+    <circle cx="0" cy="-28" r="5" fill="#22c55e"/>
+    <rect x="-12" y="-14" width="24" height="28" rx="6" fill="none" stroke="#9ca3af" stroke-width="2"/>
+    <rect x="-8" y="20" width="16" height="4" rx="2" fill="#9ca3af"/>
+  </g>
+
+  <!-- Accent chips -->
+  <circle cx="1040" cy="120" r="14" fill="#f59e0b"/>
+  <rect x="180" y="120" width="18" height="18" rx="6" fill="#06b6d4"/>
+</svg>

@@ -1,0 +1,29 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">About Us</title>
+  <desc id="desc">At Shreshta We are...</desc>
+
+  <rect x="0" y="0" width="1200" height="600" fill="none"/>
+
+  <!-- Overlapping soft shapes -->
+  <path d="M260,320 C180,220 240,120 360,140 C460,156 520,240 500,320 C470,420 340,420 260,320 Z" fill="#111827"/>
+  <path d="M860,380 C780,300 820,200 930,210 C1040,220 1100,320 1060,400 C1020,480 940,460 860,380 Z" fill="#1f2937"/>
+
+  <!-- Ribbons -->
+  <path d="M160,160 Q260,210 420,180 T760,220 T1040,240" stroke="#06b6d4" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M160,200 Q260,250 420,220 T760,260 T1040,280" stroke="#a78bfa" stroke-width="3" fill="none" opacity="0.8"/>
+
+  <!-- Modular geometry cluster -->
+  <g transform="translate(500,280)">
+    <rect x="-100" y="-60" width="80" height="80" rx="16" fill="#3b82f6"/>
+    <rect x="-10" y="-70" width="120" height="44" rx="12" fill="#22c55e"/>
+    <circle cx="80" cy="40" r="26" fill="#ef4444"/>
+    <rect x="-120" y="30" width="44" height="44" rx="12" fill="#f59e0b"/>
+    <circle cx="-70" cy="84" r="8" fill="#10b981"/>
+  </g>
+
+  <!-- Accent dots -->
+  <g fill="#9ca3af" opacity="0.28">
+    <circle cx="180" cy="480" r="3"/><circle cx="210" cy="500" r="3"/><circle cx="240" cy="520" r="3"/>
+    <circle cx="990" cy="120" r="3"/><circle cx="1020" cy="140" r="3"/>
+  </g>
+</svg>

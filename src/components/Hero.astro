@@ -7,12 +7,15 @@ const highlights = [
 ---
 
 <!-- HERO -->
-  <section
-    id="top"
-    class="mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-20 pt-12 md:flex-row md:items-center md:pb-28 md:pt-16"
-  >
+<section
+  id="top"
+  class="section-with-bg section-block reveal-section scroll-mt-24 px-4"
+>
+  <div class="section-inner">
     <div class="flex-1 space-y-6">
-      <span class="badge badge-outline border-dashed text-xs uppercase tracking-[0.2em]">
+      <span
+        class="badge badge-outline border-dashed text-xs uppercase tracking-[0.2em]"
+      >
         Software Developer · Full-Stack
       </span>
       <h1
@@ -22,11 +25,10 @@ const highlights = [
         that actually ship.
       </h1>
       <p class="max-w-xl text-base md:text-lg">
-        I create modern, responsive, and scalable digital experiences—from elegant UI designs
-        to powerful full-stack applications. Every project blends creativity with clean code
-        to bring ideas to life.
+        I create modern, responsive, and scalable digital experiences—from
+        elegant UI designs to powerful full-stack applications. Every project
+        blends creativity with clean code to bring ideas to life.
       </p>
-
       <div class="flex flex-wrap items-center gap-3">
         <a href="#contact" class="btn btn-primary btn-lg normal-case">
           Start a project
@@ -35,17 +37,17 @@ const highlights = [
           View services
         </a>
       </div>
-
       <div class="grid gap-3 text-xs text-base-content/80 sm:grid-cols-3">
-        {highlights.map((h) => (
-          <div class="flex items-start gap-2 rounded-box bg-base-200/60 p-3">
-            <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
-            <p>{h}</p>
-          </div>
-        ))}
+        {
+          highlights.map((h) => (
+            <div class="flex items-start gap-2 rounded-box bg-base-200/60 p-3">
+              <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+              <p>{h}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
-
     <div class="flex-1">
       <div class="mockup-window border bg-base-200/70 shadow-2xl">
         <div class="space-y-4 bg-base-100 p-6">
@@ -61,8 +63,8 @@ const highlights = [
           </div>
           <p class="text-sm text-base-content/80">
             Developed and maintained full-stack applications used by real users.
-            Built scalable backend APIs, optimized performance, and collaborated with design
-            and product teams to ship features faster.
+            Built scalable backend APIs, optimized performance, and collaborated
+            with design and product teams to ship features faster.
           </p>
           <div class="divider my-2"></div>
           <div class="grid grid-cols-3 gap-3 text-xs">
@@ -85,4 +87,5 @@ const highlights = [
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>

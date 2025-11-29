@@ -3,18 +3,203 @@
   themes: retro;
 }
 
+/* Smooth scrolling for nav links */
 html {
   scroll-behavior: smooth;
 }
+
+/* Make anchored sections stop below the sticky navbar */
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+/* Shared shell for all sections (optional utility) */
+.section-block {
+  position: relative;
+  padding-block: 4.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-block {
+    padding-block: 5.5rem;
+  }
+}
+
+/* If you want a consistent inner width instead of repeating mx-auto/max-w-6xl */
+.section-inner {
+  max-width: 72rem; /* ~1152px */
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* -----------------------------------
+   Section background “blobs” (retro)
+----------------------------------- */
+
+/* Section shell with organic blurred artwork */
+.section-with-bg {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate; /* prevents z-index issues */
+}
+
+.section-with-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+.section-with-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-repeat: no-repeat;
+  background-size: 900px auto; /* good for those wide images */
+  background-position: center;
+
+  opacity: 0.75;
+  filter: blur(36px) brightness(1.2) saturate(1.25);
+  mix-blend-mode: screen; /* makes blues mix softly with your pastel retro palette */
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* A softer variant you can use per section: class="section-with-bg section-muted" */
+.section-with-bg.section-muted::before {
+  background: radial-gradient(
+      circle at 10% 0%,
+      oklch(91.637% 0.034 90.515 / 0.9),
+      transparent 55%
+    ),
+    /* base100 */
+      radial-gradient(
+        circle at 90% 100%,
+        oklch(88.272% 0.049 91.774 / 0.9),
+        transparent 60%
+      ); /* base200 */
+  filter: blur(22px);
+  opacity: 0.9;
+}
+
+/* Subtle gradient “bridge” between sections for more organic flow */
+.section-divider {
+  height: 64px;
+  max-width: 72rem;
+  margin: 0 auto;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    oklch(91.637% 0.034 90.515 / 0.8),
+    transparent
+  );
+  opacity: 0.7;
+}
+
+/* -----------------------------------
+   Reveal-on-scroll animation
+----------------------------------- */
+
 .reveal-section,
 .reveal-item {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  will-change: opacity, transform;
+  transform: translateY(24px);
+  filter: blur(6px);
+  transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.6s ease-out;
+  will-change: opacity, transform, filter;
 }
 
 .reveal-visible {
   opacity: 1;
   transform: translateY(0);
+  filter: blur(0);
+}
+
+/* -----------------------------------
+   Navbar active state
+----------------------------------- */
+
+[data-nav-link].btn-active {
+  border-radius: 9999px;
+  box-shadow: 0 0 0 1px oklch(80% 0.114 19.571 / 0.7);
+}
+
+/* -----------------------------------
+   Cards & buttons: slightly snappier
+----------------------------------- */
+
+.card {
+  transition: transform 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.28),
+    box-shadow 0.28s ease-out;
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+.btn {
+  transition: transform 0.16s ease-out, box-shadow 0.16s ease-out;
+}
+
+.btn:active:not(.btn-ghost):not(.btn-link) {
+  transform: translateY(1px) scale(0.99);
+}
+
+/* -----------------------------------
+   Small legibility tweaks
+----------------------------------- */
+
+body {
+  text-rendering: optimizeLegibility;
+}
+
+/* Slightly tighter line length on big screens */
+@media (min-width: 1024px) {
+  .prose-narrow {
+    max-width: 44rem;
+  }
+}
+
+#top.section-with-bg::before {
+  background-image: url("../assets/hero.png"),
+    url("../assets/backgrounds/hero-bg.svg");
+
+  background-size: 1200px auto, /* hero.png large and soft */ 900px auto; /* hero-bg.svg */
+
+  background-position: 60% 30%,
+    /* tech illustration sits to right of text */ 20% 70%; /* blob near bottom-left behind text */
+  opacity: 0.6;
+  filter: blur(40px) brightness(1.1) saturate(1.1);
+}
+
+#services.section-with-bg::before {
+  background-image: url("../assets/backgrounds/services-illustration.svg"),
+    url("../assets/backgrounds/services-bg.svg");
+
+  background-size: 800px auto, 900px auto;
+
+  background-position: 80% 20%, /* illustration at top-right */ 15% 85%; /* blob bottom-left */
+}
+
+#about.section-with-bg::before {
+  background-image: url("../assets/backgrounds/about-bg.svg");
+  background-size: 950px auto;
+  background-position: 25% 50%;
+  opacity: 0.85;
+  filter: blur(28px) brightness(1.2);
+}
+#why.section-with-bg::before {
+  background-image: url("../assets/backgrounds/why-bg.svg");
+  background-size: 1000px auto;
+  background-position: 70% 60%;
+}
+
+#contact.section-with-bg::before {
+  background-image: url("../assets/backgrounds/contact-illustration.svg"),
+    url("../assets/backgrounds/contact-bg.svg");
+
+  background-size: 750px auto, 900px auto;
+
+  background-position: 78% 40%, /* tech shape right side */ 15% 80%; /* blob bottom-left */
 }
