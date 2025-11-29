@@ -1,21 +1,68 @@
 ---
-import About from '../components/About.astro';
-import ContactUs from '../components/ContactUs.astro';
-import Footer from '../components/Footer.astro';
-import Hero from '../components/Hero.astro';
-import Navbar from '../components/Navbar.astro';
-import Services from '../components/Services.astro';
-import WhyWorkWithUs from '../components/WhyWorkWithUs.astro';
-import Layout from '../layouts/Layout.astro';
-
+import About from "../components/About.astro";
+import ContactUs from "../components/ContactUs.astro";
+import Footer from "../components/Footer.astro";
+import Hero from "../components/Hero.astro";
+import Navbar from "../components/Navbar.astro";
+import Services from "../components/Services.astro";
+import WhyWorkWithUs from "../components/WhyWorkWithUs.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<Navbar />
-	<Hero />
-	<Services />
-	<WhyWorkWithUs />
-	<About />
-	<ContactUs />
-	<Footer />
+  <Navbar />
+  <Hero />
+  <Services />
+  <WhyWorkWithUs />
+  <About />
+  <ContactUs />
+  <Footer />
+  <script>
+    if (typeof window !== "undefined") {
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("reveal-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.15,
+        }
+      );
+
+      document
+        .querySelectorAll(".reveal-section, .reveal-item")
+        .forEach((el) => revealObserver.observe(el));
+
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll("[data-nav-link]");
+
+      function updateActiveNav() {
+        let currentId = "";
+
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          const offset = 120; // tweak based on header height
+          if (rect.top <= offset && rect.bottom > offset) {
+            currentId = section.id;
+          }
+        });
+
+        navLinks.forEach((link) => {
+          const id = link.getAttribute("data-nav-link");
+          if (id === currentId) {
+            link.classList.add("btn-active");
+          } else {
+            link.classList.remove("btn-active");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", updateActiveNav);
+      window.addEventListener("load", updateActiveNav);
+    }
+  </script>
 </Layout>

@@ -3,6 +3,7 @@ import type { APIRoute } from "astro";
 export const prerender = false; // runtime API route
 
 export const POST: APIRoute = async ({ request }) => {
+  const contactUsUrl = import.meta.env.CONTACT_US_URL;
   const formData = await request.formData();
 
   const name = String(formData.get("name") || "");
@@ -64,12 +65,25 @@ export const POST: APIRoute = async ({ request }) => {
   // - store in DB
   // - trigger a webhook, etc.
 
-  console.log("New contact form submission:", {
-    name,
-    email,
-    projectType,
-    message,
+  if (!contactUsUrl) {
+    console.error("Missing CONTACT_US_URL env var");
+    return new Response("Server misconfigured", { status: 500 });
+  }
+
+  const contactUsData = {
+    full_name: name,
+    email_address: email,
+    project_type: projectType,
+    project_details: message,
+  };
+  const _ = await fetch(contactUsUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(contactUsData),
   });
+  console.log("Submitted Successfully");
 
   // Redirect or return JSON
   return new Response(null, {

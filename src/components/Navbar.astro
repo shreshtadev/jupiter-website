@@ -1,55 +1,64 @@
 <!-- NAVBAR -->
-  <header class="sticky top-0 z-40 border-b border-base-300 bg-base-100/80 backdrop-blur">
-    <div class="navbar mx-auto max-w-6xl px-4">
-      <div class="flex-1">
-        <a
-          href="#top"
-          class="btn btn-ghost px-0 text-xl font-display tracking-tight lowercase"
-        >
-          <span class="mr-2 inline-block h-2 w-2 rounded-full bg-primary"></span>
-          shreshtasmg
-        </a>
-      </div>
-      <nav class="hidden gap-2 text-sm md:flex">
-        <a href="#services" class="btn btn-ghost btn-sm">Services</a>
-        <a href="#about" class="btn btn-ghost btn-sm">About</a>
-        <a href="#why" class="btn btn-ghost btn-sm">Why me</a>
-        <a href="#contact" class="btn btn-primary btn-sm">Let’s talk</a>
-      </nav>
-      <label
-        tabindex="0"
-        class="btn btn-ghost btn-square md:hidden"
-        for="main-drawer"
+<header
+  class="sticky top-0 z-40 border-b border-base-300 bg-base-100/80 backdrop-blur"
+>
+  <div class="navbar mx-auto max-w-6xl px-4">
+    <div class="flex-1">
+      <a
+        href="#top"
+        class="btn btn-ghost px-0 text-xl font-display tracking-tight lowercase"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-      </label>
+        <span class="mr-2 inline-block h-2 w-2 rounded-full bg-primary"></span>
+        shreshtasmg
+      </a>
     </div>
-  </header>
-
-  <!-- MOBILE DRAWER -->
-  <input id="main-drawer" type="checkbox" class="drawer-toggle hidden" />
-  <div class="drawer drawer-end md:hidden">
-    <input id="main-drawer" type="checkbox" class="drawer-toggle" />
-    <div class="drawer-side z-50">
-      <label for="main-drawer" class="drawer-overlay"></label>
-      <ul class="menu min-h-full w-64 bg-base-200 p-4 text-base">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#why">Why work with me</a></li>
-        <li><a href="#contact">Let’s talk</a></li>
-      </ul>
-    </div>
+    <nav class="hidden gap-2 text-sm md:flex">
+      <a href="#services" data-nav-link="services" class="btn btn-ghost btn-sm">
+        Services
+      </a>
+      <a href="#about" data-nav-link="about" class="btn btn-ghost btn-sm">
+        About
+      </a>
+      <a href="#why" data-nav-link="why" class="btn btn-ghost btn-sm">
+        Why me
+      </a>
+      <a href="#contact" data-nav-link="contact" class="btn btn-primary btn-sm">
+        Let&quot;s talk
+      </a>
+    </nav>
+    <label
+      tabindex="0"
+      class="btn btn-ghost btn-square md:hidden"
+      for="main-drawer"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </label>
   </div>
+</header>
+
+<!-- MOBILE DRAWER -->
+<input id="main-drawer" type="checkbox" class="drawer-toggle hidden" />
+<div class="drawer drawer-end md:hidden">
+  <input id="main-drawer" type="checkbox" class="drawer-toggle" />
+  <div class="drawer-side z-50">
+    <label for="main-drawer" class="drawer-overlay"></label>
+    <ul class="menu min-h-full w-64 bg-base-200 p-4 text-base">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#why">Why work with me</a></li>
+      <li><a href="#contact">Let’s talk</a></li>
+    </ul>
+  </div>
+</div>

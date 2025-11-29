@@ -1,12 +1,11 @@
 ---
+const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
 const recaptchaScript = `
-  const RECAPTCHA_SITE_KEY = ${import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY};
-
   function attachRecaptchaHandler() {
     const form = document.getElementById("contact-form");
     const submitBtn = document.getElementById("contact-submit-btn");
-
-    if (!form) return;
+    const tokenInput = document.getElementById("g-recaptcha-response");
+    if (!form && !tokenInput) return;
 
     form.addEventListener("submit", function (event) {
       event.preventDefault();
@@ -19,13 +18,15 @@ const recaptchaScript = `
       submitBtn?.setAttribute("disabled", "true");
 
       grecaptcha.ready(function() {
-        grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "contact_form" })
+        grecaptcha.execute('${RECAPTCHA_SITE_KEY}', { action: "contact_form" })
           .then(function(token) {
-            document.getElementById("g-recaptcha-response").value = token;
+            tokenInput.value = token;
             form.submit();
           })
-          .catch(function() {
+          .catch(function(error) {
             submitBtn?.removeAttribute("disabled");
+            debugger;
+            console.error("reCAPTCHA Token Generation Failed:", error);
             alert("reCAPTCHA failed. Please try again.");
           });
       });
@@ -38,9 +39,20 @@ const recaptchaScript = `
     attachRecaptchaHandler();
   }
 `;
+const projectType = [
+  { value: "webapp", label: "Web application" },
+  { value: "mobileapp", label: "Mobile app" },
+  { value: "staticweb", label: "Static Website" },
+  { value: "saas", label: "API / backend" },
+  { value: "consulting", label: "Consultation" },
+  { value: "other", label: "Other" },
+];
 ---
 
-<section id="contact" class="relative mx-auto max-w-6xl px-4 pb-24 md:pb-32">
+<section
+  id="contact"
+  class="reveal-section scroll-mt-24 mx-auto max-w-6xl px-4 pb-24 md:pb-32"
+>
   <!-- Retro dot grid background -->
   <div
     class="pointer-events-none absolute inset-0 -z-10 opacity-60"
@@ -201,9 +213,9 @@ const recaptchaScript = `
 
         <!-- RIGHT: CONTACT FORM -->
         <div
-          class="rounded-box border border-base-300 bg-base-100/90 p-6 md:p-7 space-y-5"
+          class="rounded-box border border-base-300 bg-base-100/90 p-6 md:p-7"
         >
-          <div class="space-y-1">
+          <div class="space-y-1 mb-5">
             <p
               class="text-xs font-semibold uppercase tracking-[0.2em] text-base-content/60"
             >
@@ -215,10 +227,14 @@ const recaptchaScript = `
             </p>
           </div>
 
-          <!-- Form (static front-end – hook to any backend you like) -->
-          <form class="space-y-4" method="post" action="/api/contact">
-            <div class="form-control">
-              <label class="label">
+          <form
+            id="contact-form"
+            class="grid gap-4"
+            method="post"
+            action="/api/contact"
+          >
+            <div class="form-control w-full">
+              <label class="label px-0 pb-1">
                 <span class="label-text text-xs uppercase tracking-[0.18em]">
                   Name
                 </span>
@@ -227,13 +243,13 @@ const recaptchaScript = `
                 type="text"
                 name="name"
                 placeholder="Your name"
-                class="input input-bordered input-sm md:input-md"
+                class="input input-bordered w-full"
                 required
               />
             </div>
 
-            <div class="form-control">
-              <label class="label">
+            <div class="form-control w-full">
+              <label class="label px-0 pb-1">
                 <span class="label-text text-xs uppercase tracking-[0.18em]">
                   Email
                 </span>
@@ -242,72 +258,69 @@ const recaptchaScript = `
                 type="email"
                 name="email"
                 placeholder="you@example.com"
-                class="input input-bordered input-sm md:input-md"
+                class="input input-bordered w-full"
                 required
               />
             </div>
 
-            <div class="form-control">
-              <label class="label">
+            <div class="form-control w-full">
+              <label class="label px-0 pb-1">
                 <span class="label-text text-xs uppercase tracking-[0.18em]">
                   Project type
                 </span>
               </label>
-              <select
-                name="projectType"
-                class="select select-bordered select-sm md:select-md"
-              >
-                <option>Web application</option>
-                <option>Mobile app</option>
-                <option>UI/UX & frontend</option>
-                <option>API / backend</option>
-                <option>Consultation</option>
-                <option>Other</option>
+              <select name="projectType" class="select select-bordered w-full">
+                {
+                  projectType.map((pt) => (
+                    <option value={pt.value}>{pt.label}</option>
+                  ))
+                }
               </select>
             </div>
 
-            <div class="form-control">
-              <label class="label">
+            <div class="form-control w-full">
+              <label class="label px-0 pb-1">
                 <span class="label-text text-xs uppercase tracking-[0.18em]">
                   Project details
                 </span>
               </label>
               <textarea
                 name="message"
-                class="textarea textarea-bordered textarea-sm md:textarea-md min-h-24"
+                class="textarea textarea-bordered w-full min-h-[120px]"
                 placeholder="Tell me about the problem, scope, and timeline..."
                 required></textarea>
             </div>
-            <!-- Hidden field for recaptcha response (optional, for convenience) -->
+
+            <!-- reCAPTCHA token (if you're using v3) -->
             <input
               type="hidden"
               name="g-recaptcha-response"
               id="g-recaptcha-response"
             />
-          </form>
 
-          <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
-            <button
-              type="submit"
-              class="btn btn-primary btn-sm md:btn-md normal-case"
-            >
-              Send message
-            </button>
-            <a href="#top" class="btn btn-ghost btn-sm md:btn-md normal-case">
-              Back to top
-            </a>
-          </div>
-          <p class="text-[0.7rem] text-base-content/60">
-            Protected by reCAPTCHA. The Google
-            <a href="https://policies.google.com/privacy" class="link"
-              >Privacy Policy</a
-            >
-            and
-            <a href="https://policies.google.com/terms" class="link"
-              >Terms of Service</a
-            >
-            apply.
-          </p>
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+              <button
+                type="submit"
+                class="btn btn-primary normal-case"
+                id="contact-submit-btn"
+              >
+                Send message
+              </button>
+              <a href="#top" class="btn btn-ghost normal-case"> Back to top </a>
+            </div>
+
+            <p class="text-[0.7rem] text-base-content/60 pt-1">
+              Protected by reCAPTCHA. The Google
+              <a href="https://policies.google.com/privacy" class="link"
+                >Privacy Policy</a
+              >
+              and
+              <a href="https://policies.google.com/terms" class="link"
+                >Terms of Service</a
+              >
+              apply.
+            </p>
+          </form>
         </div>
       </div>
     </div>
