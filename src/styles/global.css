@@ -169,34 +169,35 @@ body {
 
   background-position: 60% 30%,
     /* tech illustration sits to right of text */ 20% 70%; /* blob near bottom-left behind text */
-  opacity: 0.6;
   filter: blur(40px) brightness(1.1) saturate(1.1);
+  opacity: 0.2;
 }
 
 #services.section-with-bg::before {
-  background-image: url("../assets/backgrounds/services-illustration.svg"),
+  background-image: url("../assets/services-illustration.svg"),
     url("../assets/backgrounds/services-bg.svg");
 
   background-size: 800px auto, 900px auto;
 
   background-position: 80% 20%, /* illustration at top-right */ 15% 85%; /* blob bottom-left */
+  opacity: 0.2;
 }
 
 #about.section-with-bg::before {
   background-image: url("../assets/backgrounds/about-bg.svg");
   background-size: 950px auto;
   background-position: 25% 50%;
-  opacity: 0.85;
   filter: blur(28px) brightness(1.2);
 }
 #why.section-with-bg::before {
   background-image: url("../assets/backgrounds/why-bg.svg");
   background-size: 1000px auto;
   background-position: 70% 60%;
+  opacity: 0.2;
 }
 
 #contact.section-with-bg::before {
-  background-image: url("../assets/backgrounds/contact-illustration.svg"),
+  background-image: url("../assets/contact-illustration.svg"),
     url("../assets/backgrounds/contact-bg.svg");
 
   background-size: 750px auto, 900px auto;
