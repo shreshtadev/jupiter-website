@@ -1,9 +1,11 @@
 import type { APIRoute } from "astro";
+import PocketBase from 'pocketbase';
 
 export const prerender = false; // runtime API route
-
+const pb = new PocketBase(import.meta.env.CONTACT_US_URL);
 export const POST: APIRoute = async ({ request }) => {
   const contactUsUrl = import.meta.env.CONTACT_US_URL;
+
   const formData = await request.formData();
 
   const name = String(formData.get("name") || "");
@@ -71,18 +73,12 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const contactUsData = {
-    full_name: name,
-    email_address: email,
-    project_type: projectType,
-    project_details: message,
+    fullName: name,
+    emailId: email,
+    projectType: projectType,
+    projectDetails: message,
   };
-  const _ = await fetch(contactUsUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(contactUsData),
-  });
+  const _ = await pb.collection('contactus_forms').create(contactUsData);
   console.log("Submitted Successfully");
 
   // Redirect or return JSON
