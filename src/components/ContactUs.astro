@@ -1,328 +1,274 @@
 ---
+// Get the public site key from environment variables
 const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
-const recaptchaScript = `
-  function attachRecaptchaHandler() {
-    const form = document.getElementById("contact-form");
-    const submitBtn = document.getElementById("contact-submit-btn");
-    const tokenInput = document.getElementById("g-recaptcha-response");
-    if (!form && !tokenInput) return;
 
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      if (!window.grecaptcha) {
-        alert("reCAPTCHA is not ready.");
-        return;
-      }
-
-      submitBtn?.setAttribute("disabled", "true");
-
-      grecaptcha.ready(function() {
-        grecaptcha.execute('${RECAPTCHA_SITE_KEY}', { action: "contact_form" })
-          .then(function(token) {
-            tokenInput.value = token;
-            form.submit();
-          })
-          .catch(function(error) {
-            submitBtn?.removeAttribute("disabled");
-            debugger;
-            console.error("reCAPTCHA Token Generation Failed:", error);
-            alert("reCAPTCHA failed. Please try again.");
-          });
-      });
-    });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", attachRecaptchaHandler);
-  } else {
-    attachRecaptchaHandler();
-  }
-`;
 const projectType = [
-  { value: "webapp", label: "Web application" },
-  { value: "mobileapp", label: "Mobile app" },
-  { value: "staticweb", label: "Static Website" },
-  { value: "saas", label: "API / backend" },
-  { value: "consulting", label: "Consultation" },
-  { value: "other", label: "Other" },
+    { value: "webapp", label: "Web application" },
+    { value: "mobileapp", label: "Mobile app" },
+    { value: "staticweb", label: "Static website" },
+    { value: "saas", label: "Application Interfaces" },
+    { value: "consulting", label: "Consulting" },
+    { value: "other", label: "Other" },
 ];
 ---
 
-<section
-  id="contact"
-  class="ssection-with-bg section-block reveal-section scroll-mt-24 px-4 pb-24 md:pb-32"
->
-  <!-- Retro dot grid background -->
-  <div class="section-inner">
-    <div
-      class="pointer-events-none absolute inset-0 -z-10 opacity-60"
-      aria-hidden="true"
-    >
-      <div
-        class="h-full w-full bg-[radial-gradient(circle_at_1px_1px,rgba(148,163,184,0.3)_1px,transparent_0)] bg-size-[18px_18px]"
-      >
-      </div>
-    </div>
-    <div
-      class="card bg-base-200/95 border border-primary/40 shadow-2xl shadow-primary/25"
-    >
-      <!-- Neon border glow -->
-      <div
-        class="pointer-events-none absolute inset-0 -z-10 rounded-3xl bg-[conic-gradient(at_top,rgba(96,165,250,0.35),rgba(244,114,182,0.4),rgba(52,211,153,0.35),rgba(96,165,250,0.35))] opacity-30 blur-2xl"
-        aria-hidden="true"
-      >
-      </div>
-      <div class="card-body space-y-10 md:space-y-12">
-        <!-- HEADER -->
-        <div class="text-center space-y-4">
-          <h2 class="font-display text-3xl md:text-4xl">
-            Let&quot;s Build Something Great Together
-          </h2>
-          <p
-            class="mx-auto max-w-2xl text-sm text-base-content/80 md:text-base"
-          >
-            Share a bit about your product, timeline, and constraints. I’ll help
-            you shape it into a fast, scalable, and visually polished digital
-            experience.
-          </p>
-        </div>
-        <!-- GRID: CONTACT INFO + FORM + MAP -->
-        <div class="grid gap-8 lg:grid-cols-[1.1fr_1.3fr]">
-          <!-- LEFT: CONTACT INFO + MAP -->
-          <div class="space-y-6">
-            <!-- Contact info cards -->
-            <div class="grid gap-4 sm:grid-cols-2">
-              <!-- PHONE -->
-              <div
-                class="rounded-box border border-base-300 bg-base-100/80 p-5 space-y-3 hover:shadow-md transition-shadow"
-              >
-                <div class="flex items-center gap-3">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6 text-primary"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M2.25 4.5l4.72-1.26a2.25 2.25 0 012.7 1.46l1.04 2.86a2.25 2.25 0 01-.52 2.33L8.6 11.4a16.5 16.5 0 006 6l1.51-1.57a2.25 2.25 0 012.33-.52l2.86 1.04a2.25 2.25 0 011.46 2.7L21 21.75a2.25 2.25 0 01-2.25 2.25A16.5 16.5 0 012.25 4.5z"
-                    ></path>
-                  </svg>
-                  <p class="text-xs font-semibold uppercase tracking-[0.18em]">
-                    Phone
-                  </p>
-                </div>
-                <a
-                  href="tel:+918431188247"
-                  class="text-base hover:text-primary"
-                >
-                  +91 8431188247
-                </a>
-              </div>
-              <!-- EMAIL -->
-              <div
-                class="rounded-box border border-base-300 bg-base-100/80 p-5 space-y-3 hover:shadow-md transition-shadow"
-              >
-                <div class="flex items-center gap-3">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6 text-primary"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M21.75 7.5v9a2.25 2.25 0 01-2.25 2.25h-15A2.25 2.25 0 012.25 16.5v-9m19.5 0L12 13.5 2.25 7.5m19.5 0A2.25 2.25 0 0019.5 6h-15a2.25 2.25 0 00-2.25 1.5"
-                    ></path>
-                  </svg>
-                  <p class="text-xs font-semibold uppercase tracking-[0.18em]">
-                    Email
-                  </p>
-                </div>
-                <a
-                  href="mailto:shreshtha.smg@gmail.com"
-                  class="text-base hover:text-primary"
-                >
-                  shreshtha.smg@gmail.com
-                </a>
-              </div>
-              <!-- ADDRESS -->
-              <div
-                class="sm:col-span-2 rounded-box border border-base-300 bg-base-100/80 p-5 space-y-3 hover:shadow-md transition-shadow"
-              >
-                <div class="flex items-center gap-3">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6 text-primary"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M12 21.75s-7.5-4.64-7.5-10.5A7.5 7.5 0 0112 3.75a7.5 7.5 0 017.5 7.5c0 5.86-7.5 10.5-7.5 10.5z"
-                    ></path>
-                    <circle cx="12" cy="11.25" r="2.25"></circle>
-                  </svg>
-                  <p class="text-xs font-semibold uppercase tracking-[0.18em]">
-                    Address
-                  </p>
-                </div>
-                <p class="text-base leading-relaxed">
-                  JAI BHAVANI NIVAS, Punith Rajkumar Badavane<br />
-                  Alkola, Vinobanagara, Shivamogga, Karnataka 577204<br />
-                  India
-                </p>
-              </div>
-            </div>
-            <!-- Map card -->
+<section class="py-24" id="contact">
+    <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
             <div
-              class="rounded-box border border-base-300 bg-base-100/80 p-4 space-y-3"
+                class="bg-base-200 rounded-3xl overflow-hidden shadow-xl border border-base-300"
             >
-              <div class="flex items-center justify-between gap-3">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em]">
-                  Location
-                </p>
-                <span class="badge badge-outline badge-sm">
-                  SHIVAMOGGA · IST
-                </span>
-              </div>
-              <div class="aspect-4/3 w-full overflow-hidden rounded-box">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3872.174812303365!2d75.5397438762135!3d13.948194692713926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbbafea66e693c1%3A0x792566a84a992237!2sJai%20Bhavani%20Nivas!5e0!3m2!1sen!2sin!4v1764156232545!5m2!1sen!2sin"
-                  width="400"
-                  height="300"
-                  style="border:0;"
-                  title="location-shreshtasmg.in"
-                  allowfullscreen
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"></iframe>
-              </div>
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="lg:w-2/5 bg-primary p-8 md:p-12 text-primary-content flex flex-col"
+                    >
+                        <div class="mb-10">
+                            <h2 class="text-3xl font-bold mb-6">
+                                Let's build something!
+                            </h2>
+                            <p class="mb-8 opacity-90">
+                                Have a project in mind? I'd love to hear about
+                                it. Fill out the form and I'll get back to you
+                                within 24 hours.
+                            </p>
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-primary-content/20 flex items-center justify-center shrink-0"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            ><path
+                                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                                            ></path></svg
+                                        >
+                                    </div>
+                                    <span class="font-medium"
+                                        >+91 9110821035</span
+                                    >
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-primary-content/20 flex items-center justify-center shrink-0"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            ><path
+                                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                                            ></path><polyline
+                                                points="22,6 12,13 2,6"
+                                            ></polyline></svg
+                                        >
+                                    </div>
+                                    <span class="font-medium"
+                                        >shreshtasmg@gmail.com</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="mt-auto rounded-2xl overflow-hidden h-64 border-4 border-primary-content/10 shadow-inner"
+                        >
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3872.174812181066!2d75.5397439!3d13.9481947!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbbafea66e693c1%3A0x792566a84a992237!2sJai%20Bhavani%20Nivas!5e0!3m2!1sen!2sin!4v1767183019091!5m2!1sen!2sin"
+                                width="600"
+                                height="450"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                class="grayscale contrast-125"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="lg:w-3/5 p-8 md:p-12 bg-base-100">
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="form-control w-full">
+                                    <label class="label"
+                                        ><span class="label-text font-semibold"
+                                            >Name</span
+                                        ></label
+                                    >
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="John Doe"
+                                        class="input input-bordered w-full bg-base-200 focus:input-primary"
+                                        required
+                                    />
+                                </div>
+                                <div class="form-control w-full">
+                                    <label class="label"
+                                        ><span class="label-text font-semibold"
+                                            >Email Address</span
+                                        ></label
+                                    >
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="john@example.com"
+                                        class="input input-bordered w-full bg-base-200 focus:input-primary"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-control w-full">
+                                <label class="label"
+                                    ><span class="label-text font-semibold"
+                                        >What are you looking for?</span
+                                    ></label
+                                >
+                                <select
+                                    name="projectType"
+                                    class="select select-bordered w-full bg-base-200 focus:select-primary"
+                                    required
+                                >
+                                    <option disabled selected value=""
+                                        >Select a category</option
+                                    >
+                                    {
+                                        projectType.map((item) => (
+                                            <option value={item.value}>
+                                                {item.label}
+                                            </option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="form-control w-full">
+                                <label class="label"
+                                    ><span class="label-text font-semibold"
+                                        >Project Details</span
+                                    ></label
+                                >
+                                <textarea
+                                    name="message"
+                                    class="textarea textarea-bordered w-full min-h-[150px] bg-base-200 focus:textarea-primary"
+                                    placeholder="Tell me about your goals, timeline, and any specific requirements..."
+                                    required></textarea>
+                            </div>
+
+                            <div
+                                class="flex flex-wrap items-center justify-between gap-4 pt-4"
+                            >
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary btn-wide normal-case text-lg shadow-lg"
+                                    id="contact-submit-btn"
+                                >
+                                    Send Message
+                                </button>
+                                <a
+                                    href="#top"
+                                    class="btn btn-ghost btn-sm opacity-60 hover:opacity-100 transition-opacity"
+                                >
+                                    Back to top ↑
+                                </a>
+                            </div>
+
+                            <p
+                                class="text-xs text-base-content/50 pt-4 border-t border-base-300"
+                            >
+                                This site is protected by reCAPTCHA and the
+                                Google
+                                <a
+                                    href="https://policies.google.com/privacy"
+                                    class="link link-hover text-primary"
+                                    >Privacy Policy</a
+                                > and
+                                <a
+                                    href="https://policies.google.com/terms"
+                                    class="link link-hover text-primary"
+                                    >Terms of Service</a
+                                > apply.
+                            </p>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
-          <!-- RIGHT: CONTACT FORM -->
-          <div
-            class="rounded-box border border-base-300 bg-base-100/90 p-6 md:p-7"
-          >
-            <div class="space-y-1 mb-5">
-              <p
-                class="text-xs font-semibold uppercase tracking-[0.2em] text-base-content/60"
-              >
-                Contact form
-              </p>
-              <p class="text-sm text-base-content/80">
-                Share a quick overview. I&quot;ll get back to you with next
-                steps and timelines.
-              </p>
-            </div>
-            <form
-              id="contact-form"
-              class="grid gap-4"
-              method="post"
-              action="/api/contact"
-            >
-              <div class="form-control w-full">
-                <label class="label px-0 pb-1">
-                  <span class="label-text text-xs uppercase tracking-[0.18em]">
-                    Name
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your name"
-                  class="input input-bordered w-full"
-                  required
-                />
-              </div>
-              <div class="form-control w-full">
-                <label class="label px-0 pb-1">
-                  <span class="label-text text-xs uppercase tracking-[0.18em]">
-                    Email
-                  </span>
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="you@example.com"
-                  class="input input-bordered w-full"
-                  required
-                />
-              </div>
-              <div class="form-control w-full">
-                <label class="label px-0 pb-1">
-                  <span class="label-text text-xs uppercase tracking-[0.18em]">
-                    Project type
-                  </span>
-                </label>
-                <select
-                  name="projectType"
-                  class="select select-bordered w-full"
-                >
-                  {
-                    projectType.map((pt) => (
-                      <option value={pt.value}>{pt.label}</option>
-                    ))
-                  }
-                </select>
-              </div>
-              <div class="form-control w-full">
-                <label class="label px-0 pb-1">
-                  <span class="label-text text-xs uppercase tracking-[0.18em]">
-                    Project details
-                  </span>
-                </label>
-                <textarea
-                  name="message"
-                  class="textarea textarea-bordered w-full min-h-[120px]"
-                  placeholder="Tell me about the problem, scope, and timeline..."
-                  required></textarea>
-              </div>
-              <!-- reCAPTCHA token (if you're using v3) -->
-              <input
-                type="hidden"
-                name="g-recaptcha-response"
-                id="g-recaptcha-response"
-              />
-              <div
-                class="flex flex-wrap items-center justify-between gap-3 pt-2"
-              >
-                <button
-                  type="submit"
-                  class="btn btn-primary normal-case"
-                  id="contact-submit-btn"
-                >
-                  Send message
-                </button>
-                <a href="#top" class="btn btn-ghost normal-case">
-                  Back to top
-                </a>
-              </div>
-              <p class="text-[0.7rem] text-base-content/60 pt-1">
-                Protected by reCAPTCHA. The Google
-                <a href="https://policies.google.com/privacy" class="link"
-                  >Privacy Policy</a
-                >
-                and
-                <a href="https://policies.google.com/terms" class="link"
-                  >Terms of Service</a
-                >
-                apply.
-              </p>
-            </form>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
-<script set:html={recaptchaScript} />
+
+<script define:vars={{ RECAPTCHA_SITE_KEY }}>
+    window.RECAPTCHA_SITE_KEY = RECAPTCHA_SITE_KEY;
+</script>
+
+<script>
+    import { actions } from "astro:actions";
+
+    const form = document.getElementById("contact-form") as HTMLFormElement;
+    const submitBtn = document.getElementById(
+        "contact-submit-btn",
+    ) as HTMLButtonElement;
+    const siteKey = (window as any).RECAPTCHA_SITE_KEY;
+
+    if (form) {
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            if (!(window as any).grecaptcha) {
+                alert("reCAPTCHA is loading. Please wait a moment.");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            const originalText = submitBtn.innerText;
+            submitBtn.innerHTML =
+                '<span class="loading loading-spinner loading-sm"></span> Sending...';
+
+            try {
+                const token = await new Promise<string>((resolve, reject) => {
+                    (window as any).grecaptcha.ready(() => {
+                        (window as any).grecaptcha
+                            .execute(siteKey, { action: "contact_form" })
+                            .then(resolve)
+                            .catch(reject);
+                    });
+                });
+
+                const formData = new FormData(form);
+                const { data, error } = await actions.contactUs({
+                    name: formData.get("name") as string,
+                    email: formData.get("email") as string,
+                    projectType: formData.get("projectType") as string,
+                    message: formData.get("message") as string,
+                    recaptchaToken: token,
+                });
+
+                if (error) throw new Error(error.message);
+
+                // Redirect on success
+                window.location.href = "/?submitted=true";
+            } catch (err: any) {
+                console.error("Submission error:", err);
+                alert(
+                    err.message ||
+                        "Something went wrong. Please check your connection.",
+                );
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalText;
+            }
+        });
+    }
+</script>
